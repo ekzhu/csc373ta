@@ -1,0 +1,13 @@
+digraph network {
+s -> a [label="8/10"];
+s -> b [label="8/8"];
+s -> d [label="5/5"];
+b -> a [label="0/3"];
+b -> c [label="5/10"];
+b -> d [label="3/3"];
+a -> c [label="3/3"];
+a -> t [label="5/5"];
+d -> c [label="0/3"];
+d -> t [label="8/10"];
+c -> t [label="8/8"];
+}
