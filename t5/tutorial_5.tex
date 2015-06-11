@@ -16,10 +16,7 @@
 \section{Ford-Fulkerson}
 Consider the following flow network $G$.
 Compute a maximum flow in this network, using the Ford-Fulkerson
-algorithm: find augmenting paths and use them to augment the flow,
-one path at a time. For each augmenting path, take the time to write
-down the residual capacity and the resulting augmentation in the
-flow.
+algorithm.
 
 \begin{figure}[H]
 \centering
@@ -63,7 +60,7 @@ a new $s \rightarrow t$ path.
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{gf_1.png}
-\caption{Update path $s \rightarrow b \rightarrow c \rightarrow t$, then pick a new $s \rightarrow t$ path
+\caption{On $G_f$, update path $s \rightarrow b \rightarrow c \rightarrow t$, then pick a new $s \rightarrow t$ path
 $s \rightarrow a \rightarrow t$}
 \end{figure}
 
@@ -76,7 +73,7 @@ new unused capacities.
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{gf_2.png}
-\caption{Update path $s \rightarrow a \rightarrow t$, then pick a new path
+\caption{On $G_f$, update path $s \rightarrow a \rightarrow t$, then pick a new path
 $s \rightarrow d \rightarrow t$}
 \end{figure}
 
@@ -88,7 +85,7 @@ unused capacities.
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{gf_3.png}
-\caption{Update path $s \rightarrow d \rightarrow t$, 
+\caption{On $G_f$, update path $s \rightarrow d \rightarrow t$, 
 then pick a new path $s \rightarrow a \rightarrow c \rightarrow b
 \rightarrow d \rightarrow t$}
 \end{figure}
@@ -106,7 +103,7 @@ So by pushing flow through the current path, we are reversing the
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{gf_4.png}
-\caption{Update path $s \rightarrow a \rightarrow c \rightarrow b
+\caption{On $G_f$, update path $s \rightarrow a \rightarrow c \rightarrow b
 \rightarrow d \rightarrow t$, no more $s \rightarrow t$ path}
 \end{figure}
 
@@ -211,6 +208,15 @@ The flow across the cut $X_1$ is:
 \end{equation}
 
 Since $f(X_1) = c(X_1)$, $X_1$ is a minimum cut of $G$.
+
+An alternative way to find the minimum cut in $G$ is to look for ``blocking edges'' in
+the residual network $G_f$: starting with 
+$V_s = \{s\}$ and $V_t = \{a, b, c, d, t\}$,
+do Depth-First Search starting from $s$ and keep track of visited nodes: 
+whenever a node $n$ (other than $s$) is reached, $V_s = V_S \cup \{n\}$,
+and stops when no more out-going path that leads to un-visited node 
+can be find for the current node -- ``blocked'' by the in-coming edges.
+The resulting $V_s$ and $V_t$ form a minimum cut.
 
 \section{Multi-source and Multi-sink Network}
 Explain carefully how to solve the maximum flow problem in a
