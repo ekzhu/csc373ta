@@ -28,6 +28,10 @@ Let's start with constructing the residual flow network $G_f$.
 The initial residual flow network looks just the same as the graph diagram
 above. However, the number on each edge now represents the {\it unused
 capacity} - the maximum amount of flow that can be pushed through the edge.
+It is important to note that the flows in the residual network $G_f$ are not
+real flows - not in the same sense as the actual flows in $G$.
+You can think of $G_f$ as a data storage for storing the intermediate steps.
+
 We look for an $s \rightarrow t$ path in this network, and
 we find the path $s \rightarrow b \rightarrow c \rightarrow t$.
 
@@ -140,7 +144,8 @@ Now let's find the cut $X_0 = (\{s,b,c,d\}, \{a,t\})$.
 The cut separate nodes in the network into two groups:
 $V_s = \{s, b, c, d\}$ and $V_t = \{a, t\}$. The forward edges are defined
 as the edges going from $V_s$ to $V_t$, and the backward edges are defined
-as the edges going from $V_t$ to $V_s$. Note the terms ``forward edges''
+as the edges going from $V_t$ to $V_s$. 
+Note the terms ``forward edges''
 and ``backward edges'' are different from the ones we used in the last section.
 Here they refer to edges on the original network $G$.
 \begin{itemize}
@@ -171,6 +176,12 @@ The flow across the cut $X_0$ is:
 		&= 21
 	\end{split}
 \end{equation}
+
+{\bf Remember}, 
+when looking for the forward and backward edges of a cut, always work on the
+original network $G$. 
+The edges and labels on the residual network $G_f$ 
+are not real edges and not real flows.
 
 \section{Minimum Cut}
 Find a cut in the network above whose capacity is equal to the value
