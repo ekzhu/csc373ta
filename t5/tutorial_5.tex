@@ -47,7 +47,7 @@ flow 8 through this path.
 Now we update the residual network $G_f$:
 \begin{itemize}
 \item Update forward edges on this path with the new unused capacities
-- substracting each original unused capacity with the amount of flow 
+- subtracting each original unused capacity with the amount of flow 
 pushed through this path. If the unused capacity was reduced to 0 for an edge,
 we simply remove the edge from the network. 
 \item Add a backward edge for every forward edge on this path.
@@ -191,7 +191,7 @@ Ford-Fulkerson theorem.
 
 Start with $X_1 = (\{s\}, \{a,b,c,d,t\})$ and flow from before.
 Edge $s \rightarrow a$ crosses cut forward with residual capacity 2, so set
-$X_1 = (\{s,a\}, \{b,c,d,t\})$. Now no more forward edge acrosses the cut 
+$X_1 = (\{s,a\}, \{b,c,d,t\})$. Now no more forward edge across the cut 
 with residual capacity - all the forward edges across the cut are used at
 their full capacities.
 
@@ -251,7 +251,7 @@ flow equal to total flow into sink) -- hence, max flow in new network
 $\ge$ max flow in original network;
 \item Any flow in resulting network induces flow in original network (flow
 out of every source and into every sink limited only by edges in
-original network because of "infinite" capacities on new edges) -- 
+original network because of ``infinite'' capacities on new edges) -- 
 hence, max flow in original network $\ge$ max flow in new network.
 \end{itemize}
 
