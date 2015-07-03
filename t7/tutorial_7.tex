@@ -16,14 +16,14 @@
 In this tutorial let's look at the vertex-cover problem 
 \footnote{Based on 35.1 and 35.4 of {\it Introduction to Algorithms
 2nd Edition} by Cormen, Leiserson, Rivest, and Stein.}. 
-A {\bf vertex cover} is essentially a subset of vertices that covers all the 
+A {\bf vertex cover} is essentially a subset of vertexes that covers all the 
 edges in the graph.
-Formally, givne an undirected graph $G = (V, E)$, a vertex cover is a subset
+Formally, given an undirected graph $G = (V, E)$, a vertex cover is a subset
 $V' \subseteq V$ such that if $(i, j)$ is an edge of $G$, then either
 $i \in V'$ or $j \in V'$ (or both).
 
 The {\bf vertex cover problem}, on the other hand, is to to find the vertex
-cover with the minimum number of vertices - the {\bf optimal vertex cover}.
+cover with the minimum number of vertexes - the {\bf optimal vertex cover}.
 It looks like we can formulate the problem as Linear Programming problem.
 So let's work out the formulation first.
 \begin{figure}[H]
@@ -33,32 +33,32 @@ So let's work out the formulation first.
 \end{figure}
 
 First let's consider what to use as the decision variables.
-Imagine you create an vector $X$ of the size equals to the number of vertices, 
+Imagine you create an vector $X$ of the size equals to the number of vertexes, 
 $|V|$, in the graph $G$. 
-Then you map each position $X_i$ in the vector uniquely to a vertices $V_i$.
+Then you map each position $X_i$ in the vector uniquely to a vertexes $V_i$.
 If a vertex is used, mark a 1 at its position in the vector. If a vertex
 is not used, mark a 0.
 This way, a subset of $V$ can be represented as an $X$ vector with 1s at
-positions corresponding to the selected vertices, and 0s for the skipped
-vertices.
+positions corresponding to the selected vertexes, and 0s for the skipped
+vertexes.
 
 Now, let's come up with the objective function, which we are trying to optimize.
 We already know that the vertex cover problem is to find the cover with
-the minimum number of vertices. A cover is a subset, and we want the size
+the minimum number of vertexes. A cover is a subset, and we want the size
 of the subset to be minimum. Thus, the objective function is simply the
-number of vertices selected. We can express this value using our vector $X$.
-Since 1s in $X$ correspond to the vertices selected and 0s correspond to the
-vertices skipped, the sum of all elements in the vector $X$ is equal to the
+number of vertexes selected. We can express this value using our vector $X$.
+Since 1s in $X$ correspond to the vertexes selected and 0s correspond to the
+vertexes skipped, the sum of all elements in the vector $X$ is equal to the
 objective function: $\sum_{i \in V} X_i$.
 
 If we only have the above, the optimal solution is going to be $X$ with 0s at
 all the positions, as it minimizes the objective function.
-However, the vertex cover problem requires the selected subset of vertices to
+However, the vertex cover problem requires the selected subset of vertexes to
 cover all the edges in the graph. This means a set of constraints to our
 possible solutions. Now let's translate the requirement into constraints:
 \begin{itemize}
-\item Any edge consists of two vertices, let's use $(i,j)$
-	to denote an edge that connects vertices $i$ and $j$.
+\item Any edge consists of two vertexes, let's use $(i,j)$
+	to denote an edge that connects vertexes $i$ and $j$.
 \item If both $i$ and $j$ are selected as part of the vertex cover,
 	then $X_i + X_j = 2$, because $X_i = 1$ and $X_j = 1$, and the edge
 	$(i,j)$ is covered.
@@ -83,7 +83,7 @@ formulation:
 Actually, this formulation is not a Linear Programming problem, rather, it is
 a classic example of Integer Linear Programming problem, because of the integer
 constraints on the decision variables.
-In general, Integer Linear Programming problems are not polynominal-time
+In general, Integer Linear Programming problems are not polynomial-time
 solvable. (Why?) However, for {\bf vertex cover problem}, we can use Linear
 Programming to find an approximation of the optimal vertex cover, within 2 times
 the size of the optimal cover: 
@@ -100,7 +100,7 @@ Now we have a Linear Programming formulation:
 	X_i \ge 0 \forall i \in V
 \end{split}
 \end{equation}
-We can plugin the Simplex Algorithm and solve the above problem, but the
+We can plug-in the Simplex Algorithm and solve the above problem, but the
 solution we get will be real numbers. So we need to round the $X_i$s.
 Let the rounded result be $X_i'$:
 \begin{equation}
@@ -124,7 +124,7 @@ Next, how do we know the size of vertex cover $X'$ is within 2 times the size
 of the optimal vertex cover?
 Let the optimal solution to the original Integer Linear Programming
 problem (Equation \ref{eq:vc_ilp}) be $X^{*}$.
-It turns out $X^{*}$ is also a feasible solution to the Linear Progrmaming
+It turns out $X^{*}$ is also a feasible solution to the Linear Programming
 problem (Equation \ref{eq:vc_lp}), since the integer constraints are
 more restrict then the non-negativity constraints. Since $X$ is the optimal
 solution to the Linear Programming problem, the value of the objective function
